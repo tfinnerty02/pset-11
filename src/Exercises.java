@@ -18,7 +18,7 @@ public class Exercises {
 	}
 
 	public int findMe(ArrayList<String> list, String target) {
-		if (list.contains(null) || Arrays.asList(list) == null) {
+		if (list.contains(null) || list == null) {
 			return -1;
 		}
 
