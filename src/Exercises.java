@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Exercises {
 
@@ -81,7 +82,29 @@ public class Exercises {
 	}
 
 	public int[] bubble(int[] list, boolean ascending) {
-		return null;
+		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
+			return null;
+		}
+
+		for (int i = 0; i < list.length - 1; i++) {
+			for (int j = 0; j < list.length - i - 1; j++) {
+				if (list[j] > list[j + 1]) {
+					int temp = list[j];
+					list[j] = list[j + 1];
+					list[j + 1] = temp;
+				}
+			}
+		}
+
+		if (!ascending) {
+			Collections.reverse(Arrays.asList(list));
+		}
+
+		return list;
+	}
+
+	void bubbleSort(int arr[]) {
+
 	}
 
 	public ArrayList<String> bubble(ArrayList<String> list, boolean ascending) {
