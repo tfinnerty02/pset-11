@@ -35,8 +35,9 @@ public class Exercises {
 		if (list.contains(null) || list == null) {
 			return -1;
 		}
+
 		int low = 0;
-		int high = list.size();
+		int high = list.size() - 1;
 		int index = -1;
 
 		while (low <= high) {
@@ -54,7 +55,29 @@ public class Exercises {
 	}
 
 	public int findMeFaster(String[] list, String target) {
+		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
+			return -1;
+		}
+
+		int low = 0;
+		int high = list.length - 1;
+
+		while (low <= high) {
+			int middle = low + (high - low) / 2;
+
+			int result = target.compareTo(list[middle]);
+
+			if (result == 0) {
+				return middle;
+			} else if (result > 0) {
+				low = middle + 1;
+			} else {
+				high = middle - 1;
+			}
+		}
+
 		return -1;
+
 	}
 
 	public int[] bubble(int[] list, boolean ascending) {
