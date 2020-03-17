@@ -130,13 +130,13 @@ public class Exercises {
 		}
 
 		for (int j = 1; j < list.size(); j++) {
-			int current = list.get(j);
+			int temp = list.get(j);
 			int i = j - 1;
-			while ((i > -1) && (list.get(i) > current)) {
+			while ((i > -1) && (list.get(i) > temp)) {
 				list.set(i + 1, list.get(i));
 				i--;
 			}
-			list.set(i + 1, current);
+			list.set(i + 1, temp);
 		}
 
 		if (!ascending) {
@@ -151,7 +151,23 @@ public class Exercises {
 	}
 
 	public int[] selection(int[] list, boolean ascending) {
-		return null;
+		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
+			return null;
+		}
+
+		int n = list.length;
+		for (int i = 0; i < n - 1; i++) {
+			int min_idx = i;
+			for (int j = i + 1; j < n; j++)
+				if (list[j] < list[min_idx])
+					min_idx = j;
+
+			int temp = list[min_idx];
+			list[min_idx] = list[i];
+			list[i] = temp;
+		}
+
+		return list;
 	}
 
 	public ArrayList<String> selection(ArrayList<String> list, boolean ascending) {
