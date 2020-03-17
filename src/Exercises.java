@@ -40,7 +40,6 @@ public class Exercises {
 		int low = 0;
 		int high = list.size() - 1;
 		int index = -1;
-
 		while (low <= high) {
 			int mid = (low + high) / 2;
 			if (list.get(mid) < target) {
@@ -62,7 +61,6 @@ public class Exercises {
 
 		int low = 0;
 		int high = list.length - 1;
-
 		while (low <= high) {
 			int middle = low + (high - low) / 2;
 
@@ -120,14 +118,32 @@ public class Exercises {
 		}
 
 		if (!ascending) {
-			Collections.reverse(Arrays.asList(list));
+			Collections.reverse(list);
 		}
 
 		return list;
 	}
 
 	public ArrayList<Integer> insertion(ArrayList<Integer> list, boolean ascending) {
-		return null;
+		if (list.contains(null) || list == null) {
+			return null;
+		}
+
+		for (int j = 1; j < list.size(); j++) {
+			int current = list.get(j);
+			int i = j - 1;
+			while ((i > -1) && (list.get(i) > current)) {
+				list.set(i + 1, list.get(i));
+				i--;
+			}
+			list.set(i + 1, current);
+		}
+
+		if (!ascending) {
+			Collections.reverse(list);
+		}
+
+		return list;
 	}
 
 	public String[] insertion(String[] list, boolean ascending) {
