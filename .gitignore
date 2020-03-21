@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 /bin/
+=======
+.classpath
+.project
+bin/
+grader.sh
+src/Grader.java
+>>>>>>> 7483d125f74573c14594a658e28d24259eed8dcd

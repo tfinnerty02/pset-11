@@ -126,10 +126,10 @@ Use the provided `grademe.sh` script to verify your code against my test cases (
 To test your code, use the provided `grademe.sh` script. To run the script, use the following command.
 
 ```
-./grademe.sh exerciseNumber
+./grademe.sh exerciseName dataType targetOrAscendingValue
 ```
 
-It'll output the number passing test cases, as well as the input, expected output, and actual output of any failing test cases. Make sure your code is compiling before running this script, as it depends on the existence of a successfully compiling `Exercises.java` file.
+Unlike last time, more of the onus of testing is put on you. The script will tell you how many test cases (out of 100) passed, but won't tell you specifically which tests failed. Test cases are generated dynamically each time you run the script, so it's in your interest to test thoroughly and more than once.
 
 ## Deadline
 
