@@ -64,22 +64,22 @@ public class Exercises {
 			return -1;
 		}
 
-		int low = 0;
-		int high = list.length - 1;
-		int mid;
-		while (low <= high) {
-			mid = (low + high) / 2;
+        int start = 0;
+        int end = list.length - 1;
+        int middle = 0;
+        while (start <= end) {
+            middle = (start + end) / 2;
 
-			if (list[mid].compareTo(target) < 0) {
-				low = mid + 1;
-			} else if (list[mid].compareTo(target) > 0) {
-				high = mid - 1;
-			} else {
-				return mid;
-			}
-		}
+            if (list[middle].compareTo(target) < 0) {
+                start = middle + 1;
+            } else if (list[middle].compareTo(target) > 0) {
+                end = middle - 1;
+            } else {
+                return middle;
+            }
+        }
 
-		return -1;
+        return -1;
 	}
 
 // 5
