@@ -64,17 +64,19 @@ public class Exercises {
 			return -1;
 		}
 
-		int low = 0;
-		int high = list.length - 1;
-		int mid;
-		while (low <= high) {
-			mid = (low + high) / 2;
-			if (list[mid].compareTo(target) < 0) {
-				low = mid + 1;
-			} else if (list[mid].compareTo(target) > 0) {
-				high = mid - 1;
-			} else {
+		int left = 0;
+		int right = list.length - 1;
+		while (left <= right) {
+			int mid = left + (right - left) / 2;
+
+			int result = target.compareTo(list[mid]);
+
+			if (result == 0) {
 				return mid;
+			} else if (result > 0) {
+				left = mid + 1;
+			} else {
+				right = mid - 1;
 			}
 		}
 
