@@ -4,6 +4,7 @@ import java.util.Collections;
 
 public class Exercises {
 
+// 1
 	public int findMe(int[] list, int target) {
 		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
 			return -1;
@@ -18,8 +19,9 @@ public class Exercises {
 		return -1;
 	}
 
+// 2
 	public int findMe(ArrayList<String> list, String target) {
-		if (list.contains(null) || list == null) {
+		if (list == null || list.size() == 0 || target == null) {
 			return -1;
 		}
 
@@ -32,6 +34,7 @@ public class Exercises {
 		return -1;
 	}
 
+// 3
 	public int findMeFaster(ArrayList<Integer> list, int target) {
 		if (list.contains(null) || list == null) {
 			return -1;
@@ -51,9 +54,11 @@ public class Exercises {
 				break;
 			}
 		}
+
 		return index;
 	}
 
+// 4
 	public int findMeFaster(String[] list, String target) {
 		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
 			return -1;
@@ -61,24 +66,22 @@ public class Exercises {
 
 		int low = 0;
 		int high = list.length - 1;
+		int mid;
 		while (low <= high) {
-			int middle = low + (high - low) / 2;
-
-			int result = target.compareTo(list[middle]);
-
-			if (result == 0) {
-				return middle;
-			} else if (result > 0) {
-				low = middle + 1;
+			mid = (low + high) / 2;
+			if (list[mid].compareTo(target) < 0) {
+				low = mid + 1;
+			} else if (list[mid].compareTo(target) > 0) {
+				high = mid - 1;
 			} else {
-				high = middle - 1;
+				return mid;
 			}
 		}
 
 		return -1;
-
 	}
 
+// 5
 	public int[] bubble(int[] list, boolean ascending) {
 		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
 			return null;
@@ -95,24 +98,30 @@ public class Exercises {
 		}
 
 		if (!ascending) {
-			Collections.reverse(Arrays.asList(list));
+			int i, t;
+			int n = list.length;
+			for (i = 0; i < n / 2; i++) {
+				t = list[i];
+				list[i] = list[n - i - 1];
+				list[n - i - 1] = t;
+			}
 		}
 
 		return list;
 	}
 
+// 6
 	public ArrayList<String> bubble(ArrayList<String> list, boolean ascending) {
 		if (list.contains(null) || list == null) {
 			return null;
 		}
 
-		String temp;
-		for (int j = 0; j < list.size(); j++) {
-			for (int i = j + 1; i < list.size(); i++) {
-				if (list.get(i).compareTo(list.get(j)) < 0) {
-					temp = list.get(j);
-					list.set(j, list.get(i));
-					list.set(i, temp);
+		for (int i = 0; i < list.size() - 1; i++) {
+			for (int j = 0; j < list.size() - 1 - i; j++) {
+				if (list.get(j).compareTo(list.get(j + 1)) > 0) {
+					String temp = list.get(j);
+					list.set(j, list.get(j + 1));
+					list.set(j + 1, temp);
 				}
 			}
 		}
@@ -122,8 +131,10 @@ public class Exercises {
 		}
 
 		return list;
+
 	}
 
+// 7
 	public ArrayList<Integer> insertion(ArrayList<Integer> list, boolean ascending) {
 		if (list.contains(null) || list == null) {
 			return null;
@@ -146,10 +157,12 @@ public class Exercises {
 		return list;
 	}
 
+// 8
 	public String[] insertion(String[] list, boolean ascending) {
 		return null;
 	}
 
+// 9
 	public int[] selection(int[] list, boolean ascending) {
 		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
 			return null;
@@ -167,17 +180,30 @@ public class Exercises {
 			list[i] = temp;
 		}
 
+		if (!ascending) {
+			int i, t;
+			int x = list.length;
+			for (i = 0; i < x / 2; i++) {
+				t = list[i];
+				list[i] = list[x - i - 1];
+				list[x - i - 1] = t;
+			}
+		}
+
 		return list;
 	}
 
+// 10
 	public ArrayList<String> selection(ArrayList<String> list, boolean ascending) {
 		return null;
 	}
 
+// 11
 	public ArrayList<Integer> merge(ArrayList<Integer> list, boolean ascending) {
 		return null;
 	}
 
+// 12
 	public String[] merge(String[] list, boolean ascending) {
 		return null;
 	}
