@@ -64,19 +64,18 @@ public class Exercises {
 			return -1;
 		}
 
-		int left = 0;
-		int right = list.length - 1;
-		while (left <= right) {
-			int mid = left + (right - left) / 2;
+		int low = 0;
+		int high = list.length - 1;
+		int mid;
+		while (low <= high) {
+			mid = (low + high) / 2;
 
-			int result = target.compareTo(list[mid]);
-
-			if (result == 0) {
-				return mid;
-			} else if (result > 0) {
-				left = mid + 1;
+			if (list[mid].compareTo(target) < 0) {
+				low = mid + 1;
+			} else if (list[mid].compareTo(target) > 0) {
+				high = mid - 1;
 			} else {
-				right = mid - 1;
+				return mid;
 			}
 		}
 
@@ -253,7 +252,69 @@ public class Exercises {
 
 // 11
 	public ArrayList<Integer> merge(ArrayList<Integer> list, boolean ascending) {
-		return null;
+		if (list.contains(null) || list == null) {
+			return null;
+		}
+
+		ArrayList<Integer> left = new ArrayList<Integer>();
+		ArrayList<Integer> right = new ArrayList<Integer>();
+		int center;
+
+		if (list.size() == 1) {
+			return list;
+		} else {
+			center = list.size() / 2;
+			for (int i = 0; i < center; i++) {
+				left.add(list.get(i));
+			}
+
+			for (int i = center; i < list.size(); i++) {
+				right.add(list.get(i));
+			}
+
+			left = merge(left, true);
+			right = merge(right, true);
+			combineHalves(left, right, list);
+		}
+
+		if (!ascending) {
+			Collections.reverse(list);
+		}
+
+		return list;
+	}
+
+// combines ArrayLists from exercise 11
+	private void combineHalves(ArrayList<Integer> left, ArrayList<Integer> right, ArrayList<Integer> complete) {
+		int leftIndex = 0;
+		int rightIndex = 0;
+		int completeArrayIndex = 0;
+
+		while (leftIndex < left.size() && rightIndex < right.size()) {
+			if ((left.get(leftIndex).compareTo(right.get(rightIndex))) < 0) {
+				complete.set(completeArrayIndex, left.get(leftIndex));
+				leftIndex++;
+			} else {
+				complete.set(completeArrayIndex, right.get(rightIndex));
+				rightIndex++;
+			}
+			completeArrayIndex++;
+		}
+
+		ArrayList<Integer> rest;
+		int restIndex;
+		if (leftIndex >= left.size()) {
+			rest = right;
+			restIndex = rightIndex;
+		} else {
+			rest = left;
+			restIndex = leftIndex;
+		}
+
+		for (int i = restIndex; i < rest.size(); i++) {
+			complete.set(completeArrayIndex, rest.get(i));
+			completeArrayIndex++;
+		}
 	}
 
 // 12
@@ -281,22 +342,21 @@ public class Exercises {
 		}
 
 		if (!ascending) {
-			if (!ascending) {
-				int i;
-				String t;
-				int x = list.length;
-				for (i = 0; i < x / 2; i++) {
-					t = list[i];
-					list[i] = list[x - i - 1];
-					list[x - i - 1] = t;
-				}
+			int i;
+			String t;
+			int x = list.length;
+			for (i = 0; i < x / 2; i++) {
+				t = list[i];
+				list[i] = list[x - i - 1];
+				list[x - i - 1] = t;
 			}
 		}
 
 		return list;
 	}
 
-	public static void combine(String[] list, String[] left, String[] right) {
+// combines arrays from exercise 12
+	private static void combine(String[] list, String[] left, String[] right) {
 		int a = 0;
 		int b = 0;
 		for (int i = 0; i < list.length; i++) {
