@@ -222,7 +222,33 @@ public class Exercises {
 
 // 10
 	public ArrayList<String> selection(ArrayList<String> list, boolean ascending) {
-		return null;
+		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
+			return null;
+		}
+
+		for (int i = 0; i < list.size(); i++) {
+			String smallest = list.get(i);
+			int smallestIndex = i;
+			for (int j = i; j < list.size(); j++) {
+				String value = list.get(j);
+				if (value.compareTo(smallest) < 0) {
+					smallest = value;
+					smallestIndex = j;
+				}
+			}
+
+			if (smallestIndex != i) {
+				String head = list.get(i);
+				list.set(i, smallest);
+				list.set(smallestIndex, head);
+			}
+		}
+
+		if (!ascending) {
+			Collections.reverse(list);
+		}
+
+		return list;
 	}
 
 // 11
@@ -232,6 +258,55 @@ public class Exercises {
 
 // 12
 	public String[] merge(String[] list, boolean ascending) {
-		return null;
+		if (Arrays.asList(list).contains(null) || Arrays.asList(list) == null) {
+			String[] temp = new String[0];
+			return temp;
+		}
+
+		if (list.length >= 2) {
+			String[] left = new String[list.length / 2];
+			String[] right = new String[list.length - list.length / 2];
+
+			for (int i = 0; i < left.length; i++) {
+				left[i] = list[i];
+			}
+
+			for (int i = 0; i < right.length; i++) {
+				right[i] = list[i + list.length / 2];
+			}
+
+			merge(left, true);
+			merge(right, true);
+			combine(list, left, right);
+		}
+
+		if (!ascending) {
+			if (!ascending) {
+				int i;
+				String t;
+				int x = list.length;
+				for (i = 0; i < x / 2; i++) {
+					t = list[i];
+					list[i] = list[x - i - 1];
+					list[x - i - 1] = t;
+				}
+			}
+		}
+
+		return list;
+	}
+
+	public static void combine(String[] list, String[] left, String[] right) {
+		int a = 0;
+		int b = 0;
+		for (int i = 0; i < list.length; i++) {
+			if (b >= right.length || (a < left.length && left[a].compareToIgnoreCase(right[b]) < 0)) {
+				list[i] = left[a];
+				a++;
+			} else {
+				list[i] = right[b];
+				b++;
+			}
+		}
 	}
 }
